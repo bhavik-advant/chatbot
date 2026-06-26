@@ -1,0 +1,225 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.headerIcon {
+  color: var(--primary);
+}
+
+.dropZone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.5rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.01);
+  transition: all var(--transition-normal);
+  min-height: 150px;
+}
+
+.dropZone:hover:not(.disabled) {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.03);
+}
+
+.dragActive {
+  border-color: var(--accent);
+  background: rgba(168, 85, 247, 0.05) !important;
+  transform: scale(0.98);
+}
+
+.disabled {
+  cursor: not-allowed;
+  border-style: solid;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.fileInput {
+  display: none;
+}
+
+.promptContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.uploadIcon {
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.dropZone:hover .uploadIcon {
+  color: var(--primary);
+}
+
+.mainPrompt {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.subPrompt {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Loader Animation */
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(99, 102, 241, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loadingStep {
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-weight: 500;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Error styles */
+.errorAlert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--error-glow);
+  color: var(--error);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  border-radius: var(--radius-sm);
+  font-size: 0.825rem;
+}
+
+.errorAlert svg {
+  flex-shrink: 0;
+}
+
+/* Document List */
+.docListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.listTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.docCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-light);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.docCard:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--border-hover);
+}
+
+.activeCard {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.07);
+  box-shadow: 0 0 10px 1px rgba(99, 102, 241, 0.05);
+}
+
+.docIcon {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.activeCard .docIcon {
+  color: var(--accent);
+}
+
+.docInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0; /* Ensures text truncates inside flex box */
+}
+
+.docName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.docMeta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.deleteButton {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.deleteButton:hover {
+  color: var(--error);
+  background: rgba(244, 63, 94, 0.1);
+}
