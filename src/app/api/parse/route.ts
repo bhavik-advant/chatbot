@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import "pdf-parse";
+import { PDFParse } from "pdf-parse";
 
 interface Chunk {
   text: string;
@@ -83,15 +83,6 @@ export async function POST(request: NextRequest) {
     }
     if (typeof g.Path2D === "undefined") {
       g.Path2D = class Path2D {};
-    }
-
-    // Load pdf-parse using eval("require") to bypass Next.js Webpack/Turbopack compilation.
-    // This allows pdf-parse to resolve its internal worker files natively using Node's CommonJS loader.
-    const pdfModule = eval("require")("pdf-parse");
-    const PDFParse = pdfModule.PDFParse;
-    
-    if (!PDFParse) {
-      throw new Error("PDFParse class not found in pdf-parse module.");
     }
 
     const parser = new PDFParse({ data: buffer });
