@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import "pdfjs-dist/legacy/build/pdf.worker.mjs";
 
 // Polyfill browser-only canvas globals that pdf-parse (pdf.js) expects in Node.js
 // This MUST run before 'pdf-parse' is imported.
