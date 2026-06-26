@@ -2,18 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Polyfill browser-only canvas globals that pdf-parse (pdf.js) expects in Node.js
 // This MUST run before 'pdf-parse' is imported.
-const g = global as any;
-if (typeof g.DOMMatrix === "undefined") {
-  g.DOMMatrix = class DOMMatrix {};
+if (typeof globalThis.DOMMatrix === "undefined") {
+  (globalThis as any).DOMMatrix = class DOMMatrix {};
 }
-if (typeof g.ImageData === "undefined") {
-  g.ImageData = class ImageData {};
+if (typeof globalThis.ImageData === "undefined") {
+  (globalThis as any).ImageData = class ImageData {};
 }
-if (typeof g.Path2D === "undefined") {
-  g.Path2D = class Path2D {};
+if (typeof globalThis.Path2D === "undefined") {
+  (globalThis as any).Path2D = class Path2D {};
 }
-
-import { PDFParse } from "pdf-parse";
 
 interface Chunk {
   text: string;
@@ -87,6 +84,7 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
+    const { PDFParse } = await import("pdf-parse");
     const parser = new PDFParse({ data: buffer });
     const parsedData = await parser.getText();
 
